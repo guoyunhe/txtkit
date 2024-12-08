@@ -1,16 +1,13 @@
-import { AuthStatus, useAuth } from '@guoyunhe/react-auth';
+import { useAuth } from '@guoyunhe/react-auth';
 import {
   AutoAwesome as AutoAwesomeIcon,
   CreditCard,
-  Dashboard as DashboardIcon,
   Login as LoginIcon,
-  Logout as LogoutIcon,
   Menu as MenuIcon,
   PersonAdd as PersonAddIcon,
-  Settings as SettingsIcon,
   SupportAgent as SupportAgentIcon,
 } from '@mui/icons-material';
-import { AppBar, Avatar, Box, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, IconButton, Stack, Toolbar, Typography } from '@mui/material';
 import { ThemeIconButton } from 'material-app';
 import { useTranslation } from 'react-i18next';
 import { NavLink, useLocation } from 'react-router-dom';
@@ -89,85 +86,32 @@ export default function TopNav({ onMenuButtonClick }: TopNavProps) {
         </Stack>
         <Box flex="1 1 auto" />
         <ThemeIconButton />
-        {auth.status === AuthStatus.LoggedIn && auth.user ? (
-          <Stack direction="row">
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={
-                <Avatar
-                  src={auth.user.avatar?.url}
-                  alt={auth.user.name}
-                  sx={{ width: 24, height: 24 }}
-                />
-              }
-              component={NavLink}
-              to="/app/settings"
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {auth.user.name}
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={<DashboardIcon />}
-              component={NavLink}
-              to="/app"
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {t('Dashboard')}
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={<SettingsIcon />}
-              component={NavLink}
-              to="/app"
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {t('Settings')}
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={<LogoutIcon />}
-              onClick={logout}
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {t('Logout')}
-            </Button>
-          </Stack>
-        ) : (
-          <Stack direction="row">
-            <LanguageMenu />
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={<LoginIcon />}
-              component={NavLink}
-              to="/login"
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {t('Login')}
-            </Button>
-            <Button
-              variant="text"
-              color="inherit"
-              disableElevation
-              startIcon={<PersonAddIcon />}
-              component={NavLink}
-              to="/register"
-              sx={{ display: { xs: 'none', sm: 'flex' } }}
-            >
-              {t('Register')}
-            </Button>
-          </Stack>
-        )}
+
+        <Stack direction="row">
+          <LanguageMenu />
+          <Button
+            variant="text"
+            color="inherit"
+            disableElevation
+            startIcon={<LoginIcon />}
+            component="a"
+            href="https://github.com/guoyunhe/txtkit"
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          >
+            {t('Login')}
+          </Button>
+          <Button
+            variant="text"
+            color="inherit"
+            disableElevation
+            startIcon={<PersonAddIcon />}
+            component={NavLink}
+            to="/register"
+            sx={{ display: { xs: 'none', sm: 'flex' } }}
+          >
+            {t('Register')}
+          </Button>
+        </Stack>
       </Toolbar>
     </AppBar>
   );
